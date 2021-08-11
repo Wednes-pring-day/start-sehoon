@@ -8,4 +8,15 @@ import lombok.Setter;
 public class User {
     private Long id;
     private String name;
+    private Long age;
+
+    public User (UserRequestDto userRequestDto) {
+        this.name = userRequestDto.getName();
+        this.age = userRequestDto.getAge();
+    }
+
+    public void UpdateUser (UserRequestDto userRequestDto) {
+        this.name = userRequestDto.getName();
+        this.age = userRequestDto.getAge();
+    }
 }

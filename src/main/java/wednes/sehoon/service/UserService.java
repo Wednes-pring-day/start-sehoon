@@ -1,6 +1,7 @@
 package wednes.sehoon.service;
 
 import wednes.sehoon.domain.User;
+import wednes.sehoon.domain.UserRequestDto;
 import wednes.sehoon.repository.UserRepository;
 
 import java.util.List;
@@ -29,6 +30,22 @@ public class UserService {
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
+    }
+
+    /**
+     * @회원_정보_수정
+     */
+    public Long editUser(Long id, UserRequestDto userRequestDto) {
+        User user = validateUser(id);
+        user.UpdateUser(userRequestDto);
+        return user.getId();
+    }
+
+    private User validateUser(Long id) {
+        User user = userRepository.findbyId(id).orElseThrow(
+                () -> new IllegalArgumentException("해당 id를 가진 유저가 존재하지 않습니다.")
+        );
+        return user;
     }
 
     /**
